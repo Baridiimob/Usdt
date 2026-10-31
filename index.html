@@ -1,133 +1,280 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شراء USDT عبر بريدي موب</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Cairo', sans-serif;
-            background-color: #f9fafb;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
-        .container {
-            width: 95%;
-            max-width: 500px;
-            background: #ffffff;
-            padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        }
-        .logo {
-            text-align: center;
-            margin-bottom: 15px;
-        }
-        .logo img {
-            max-width: 100px;
-        }
-        h2 {
-            text-align: center;
-            color: #0d9488;
-            margin-bottom: 20px;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        label {
-            font-weight: 700;
-            margin-bottom: 5px;
-            color: #374151;
-        }
-        input, textarea {
-            padding: 12px;
-            border: 1px solid #d1d5db;
-            border-radius: 10px;
-            font-size: 16px;
-        }
-        input[type="submit"] {
-            background-color: #0d9488;
-            color: white;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        input[type="submit"]:hover {
-            background-color: #0f766e;
-        }
-        .note, .rate-box {
-            background: #ecfdf5;
-            color: #065f46;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-            font-size: 14px;
-        }
-        .rate-box {
-            background: #fff7ed;
-            color: #7c2d12;
-            border: 1px solid #fdba74;
-        }
-    </style>
-    <script>
-        function calculateUSDT() {
-            const rate = 1 / 245;
-            const amountDZD = document.querySelector('input[name="amount_dzd"]').value;
-            const usdtAmount = (amountDZD * rate).toFixed(4);
-            document.getElementById("usdt_result").innerText = usdtAmount + ' USDT';
-        }
-
-        function calculateDZD() {
-            const rate = 245;
-            const usdtInput = document.querySelector('input[name="usdt_amount"]').value;
-            const dzdAmount = (usdtInput * rate).toFixed(2);
-            document.getElementById("dzd_result").innerText = dzdAmount + ' دج';
-        }
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EXCHANGE DZ</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#081426;color:#fff;
+ font-family:Tahoma,Arial,sans-serif;
+}
+.container{max-width:600px;margin:auto;padding:20px}
+header{text-align:center;padding:25px 0}
+.logo{font-size:29px;font-weight:bold;color:#f5c451}
+header p{color:#9baec4;font-size:13px}
+.hero{
+ background:linear-gradient(135deg,#183956,#10243b);
+ border:1px solid #ffffff18;border-radius:22px;
+ padding:24px;text-align:center;
+}
+.hero h2{font-size:25px;margin:5px}
+.hero p{color:#b7c6d7;font-size:13px}
+.rate{
+ margin-top:20px;background:#071426;
+ padding:17px;border-radius:14px;
+}
+.rate small{display:block;color:#9baec4}
+.rate strong{font-size:25px;color:#48d6a0}
+.card{
+ margin-top:20px;background:#102139;
+ padding:20px;border-radius:20px;
+ border:1px solid #ffffff13;
+}
+.tabs{display:flex;gap:10px;margin-bottom:20px}
+.tabs button{
+ flex:1;padding:15px;border:0;border-radius:12px;
+ background:#263950;color:white;font-weight:bold;
+ cursor:pointer;
+}
+.tabs button.active{background:#eebc48;color:#172337}
+h3{font-size:19px}
+.payment{
+ background:#192f49;border-radius:13px;
+ padding:15px;margin:12px 0;
+}
+.payment small{color:#afc0d2}
+.account{
+ display:flex;align-items:center;justify-content:space-between;
+ gap:8px;margin-top:12px;background:#081426;
+ padding:12px;border-radius:9px;
+}
+.account b{direction:ltr;overflow-wrap:anywhere;font-size:14px}
+.copy{
+ background:#159c76;color:white;border:0;
+ padding:8px;border-radius:7px;cursor:pointer;
+}
+label{display:block;margin:17px 0 8px;font-size:14px}
+input{
+ width:100%;padding:14px;border-radius:10px;
+ border:1px solid #344b64;background:#081426;
+ color:white;font-size:15px;outline:none;
+}
+input:focus{border-color:#48d6a0}
+input::placeholder{color:#7e91a8}
+.calc{
+ margin-top:12px;background:#103d35;
+ padding:15px;border-radius:11px;
+ display:flex;justify-content:space-between;
+ align-items:center;gap:10px;
+}
+.calc span{font-size:12px;color:#b3d8ca}
+.calc strong{color:#48d6a0;font-size:18px}
+.submit{
+ width:100%;padding:16px;margin-top:22px;
+ border:0;border-radius:11px;
+ background:linear-gradient(135deg,#48d6a0,#159c76);
+ color:#06271c;font-size:17px;font-weight:bold;
+ cursor:pointer;
+}
+.note{font-size:11px;color:#9baec4;line-height:1.8}
+.hidden{display:none!important}
+.success{
+ display:none;text-align:center;padding:25px;
+}
+.success.show{display:block}
+.check{font-size:65px;color:#48d6a0}
+.success h2{color:#48d6a0}
+.reference{
+ background:#081426;padding:15px;border-radius:12px;
+ margin:20px 0;direction:ltr;
+}
+footer{text-align:center;color:#71849a;font-size:12px;padding:25px}
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">
-            <img src="usdt-logo.png" alt="USDT Logo">
-        </div>
-        <h2>شراء USDT (BEP20)</h2>
 
-        <div class="rate-box">
-            سعر الصرف: <strong>1 USDT = 245 دج</strong><br>
-            الكمية المقدرة: <span id="usdt_result">0 USDT</span><br>
-            المبلغ المطلوب: <span id="dzd_result">0 دج</span>
-        </div>
+<div class="container">
 
-        <form method="POST" action="submit_order.php" enctype="multipart/form-data" oninput="calculateUSDT(); calculateDZD();">
-            <label>المبلغ بالدينار الجزائري</label>
-            <input type="number" name="amount_dzd" required>
+<header>
+ <div class="logo">⇄ EXCHANGE DZ</div>
+ <p>منصة تبادل USDT والدينار الجزائري</p>
+</header>
 
-            <label>كمية USDT المراد شراؤها</label>
-            <input type="number" step="0.0001" name="usdt_amount">
+<div class="hero">
+ <h2>مرحباً بك 👋</h2>
+ <p>بيع وشراء USDT بسهولة</p>
+ <div class="rate">
+  <small>سعر الصرف الثابت</small>
+  <strong>1 USDT = 240 DZD</strong>
+ </div>
+</div>
 
-            <label>رقم الهاتف</label>
-            <input type="text" name="phone" required>
+<div class="card" id="exchange">
 
-            <label>محفظتك BEP20</label>
-            <input type="text" name="bep20_address" required>
+<div class="tabs">
+ <button id="sellTab" class="active"
+ onclick="choose('sell')">بيع USDT</button>
+ <button id="buyTab"
+ onclick="choose('buy')">شراء USDT</button>
+</div>
 
-            <label>إيصال التحويل (اختياري)</label>
-            <input type="file" name="receipt">
+<h3 id="title">بيع USDT مقابل الدينار</h3>
 
-            <input type="submit" value="إرسال الطلب">
-        </form>
+<div id="sellInfo" class="payment">
+ <small>أرسل USDT إلى حساب RedotPay الخاص بنا</small>
+ <div class="account">
+  <b>1186855662</b>
+  <button class="copy" onclick="copyText('1186855662')">نسخ</button>
+ </div>
+</div>
 
-        <div class="note">
-            الرجاء تحويل المبلغ إلى رقم بريدي موب <strong>00799999002709037546</strong>، ثم إرسال الطلب. سيتم التحقق يدوياً من التحويل وإرسال USDT إلى محفظتك.
-        </div>
-    </div>
+<div id="buyInfo" class="payment hidden">
+ <small>أرسل الدينار إلى RIP الخاص بنا عبر بريدي موب</small>
+ <div class="account">
+  <b>00799999002709037546</b>
+  <button class="copy" onclick="copyText('00799999002709037546')">نسخ</button>
+ </div>
+</div>
+
+<form id="form">
+
+<label>المبلغ الذي تريد تبادله (USDT)</label>
+<input type="number" id="amount" min="0.01"
+step="0.01" placeholder="مثلاً 100" required>
+
+<div class="calc">
+ <span>المبلغ المقابل بالدينار</span>
+ <strong id="result">0 DZD</strong>
+</div>
+
+<div id="sellFields">
+ <label>RIP الخاص بك لاستقبال الدينار</label>
+ <input type="text" id="rip"
+ placeholder="أدخل رقم RIP" required>
+</div>
+
+<div id="buyFields" class="hidden">
+ <label>UID الخاص بك في RedotPay</label>
+ <input type="text" id="uid"
+ placeholder="أدخل UID" disabled>
+</div>
+
+<label>البريد الإلكتروني</label>
+<input type="email" id="email"
+placeholder="example@email.com" required>
+
+<label>صورة إثبات الدفع</label>
+<input type="file" id="proof" accept="image/*" required>
+
+<p class="note">
+يرجى التأكد من صحة معلوماتك وإرفاق صورة واضحة لإثبات الدفع.
+لا ترسل كلمة المرور أو رمز التحقق الخاص بحسابك.
+</p>
+
+<button type="submit" class="submit">
+تأكيد إرسال الطلب ←
+</button>
+</form>
+</div>
+
+<div class="card success" id="success">
+ <div class="check">✓</div>
+ <h2>تم تسجيل طلبك بنجاح!</h2>
+ <p>طلبك الآن قيد المراجعة.</p>
+ <div class="reference">
+  رقم الطلب:
+  <h3 id="ref"></h3>
+ </div>
+ <p>احتفظ برقم الطلب للمتابعة.</p>
+ <button class="submit" onclick="newOrder()">
+ طلب جديد
+ </button>
+</div>
+
+<footer>
+EXCHANGE DZ © 2026
+</footer>
+
+</div>
+
+<script>
+let mode="sell";
+const RATE=240;
+
+function choose(type){
+ mode=type;
+
+ sellTab.classList.toggle("active",type==="sell");
+ buyTab.classList.toggle("active",type==="buy");
+
+ sellInfo.classList.toggle("hidden",type!=="sell");
+ buyInfo.classList.toggle("hidden",type!=="buy");
+
+ sellFields.classList.toggle("hidden",type!=="sell");
+ buyFields.classList.toggle("hidden",type!=="buy");
+
+ rip.required=type==="sell";
+ rip.disabled=type!=="sell";
+
+ uid.required=type==="buy";
+ uid.disabled=type!=="buy";
+
+ title.textContent=type==="sell"
+ ?"بيع USDT مقابل الدينار"
+ :"شراء USDT بالدينار";
+}
+
+amount.addEventListener("input",()=>{
+ let n=Number(amount.value);
+ result.textContent=n>0
+ ?(n*RATE).toLocaleString("en-US")+" DZD"
+ :"0 DZD";
+});
+
+function copyText(value){
+ if(navigator.clipboard && window.isSecureContext){
+  navigator.clipboard.writeText(value)
+  .then(()=>alert("تم النسخ بنجاح"));
+ }else{
+  prompt("انسخ الرقم:",value);
+ }
+}
+
+form.addEventListener("submit",(e)=>{
+ e.preventDefault();
+
+ let file=proof.files[0];
+
+ if(!file || !file.type.startsWith("image/")){
+  alert("يرجى اختيار صورة إثبات الدفع");
+  return;
+ }
+
+ if(file.size>5*1024*1024){
+  alert("حجم الصورة يجب ألا يتجاوز 5MB");
+  return;
+ }
+
+ ref.textContent="EX-"+Date.now();
+
+ exchange.classList.add("hidden");
+ success.classList.add("show");
+
+ window.scrollTo({top:0,behavior:"smooth"});
+});
+
+function newOrder(){
+ form.reset();
+ result.textContent="0 DZD";
+ success.classList.remove("show");
+ exchange.classList.remove("hidden");
+ choose("sell");
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+</script>
+
 </body>
 </html>
