@@ -400,7 +400,12 @@ document.getElementById('trackOrderForm').addEventListener('submit', async (e)=>
 function escapeTrackText(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 
 let mode='buy';
-const RATE=240;
+let RATE=240;
+let ordersEnabled=true;
+async function loadExchangeSettings(){
+ try{const {data,error}=await supabaseClient.rpc('get_public_exchange_settings');if(error)throw error;if(data){const row=Array.isArray(data)?data[0]:data;if(row){const r=Number(row.usdt_rate);if(Number.isFinite(r)&&r>0)RATE=r;ordersEnabled=row.orders_enabled!==false;const rateEl=document.getElementById('rateDisplay');if(rateEl)rateEl.textContent=String(RATE);const submit=document.getElementById('submitBtn');if(submit){submit.disabled=!ordersEnabled;submit.textContent=ordersEnabled?'إرسال الطلب':'الطلبات متوقفة مؤقتًا';}const amountEl=document.getElementById('amount');if(amountEl)amountEl.dispatchEvent(new Event('input'));}}}catch(e){console.warn('Could not load exchange settings; using fallback rate.',e);}
+}
+loadExchangeSettings();
 function choose(type){
  mode=type;
  document.body.classList.toggle('theme-sell',type==='sell');
@@ -437,6 +442,7 @@ document.getElementById('orderForm').addEventListener('submit', async function(e
    ? document.getElementById('customerRIP').value
    : document.getElementById('customerUID').value).trim();
 
+ if(!ordersEnabled){alert('استقبال الطلبات متوقف مؤقتًا. يرجى المحاولة لاحقًا.');return;}
  if(!file || !['image/jpeg','image/png','image/webp'].includes(file.type)){
    alert('يرجى إرفاق صورة بصيغة JPG أو PNG أو WEBP.'); return;
  }
