@@ -4,7 +4,14 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
 
   const origin = req.headers.origin || "";
-  if (origin !== "https://exchangedz.vercel.app") {
+  const host = req.headers.host || "";
+  let originHost = "";
+  try {
+    originHost = new URL(origin).host;
+  } catch (_) {}
+  // Allow the production domain and Vercel preview domains, but only when
+  // the request originates from the same host serving this function.
+  if (!originHost || originHost !== host) {
     return res.status(403).json({ error: "Origin not allowed" });
   }
 
